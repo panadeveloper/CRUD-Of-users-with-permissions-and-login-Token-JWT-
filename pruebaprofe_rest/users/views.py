@@ -33,7 +33,6 @@ def list_user(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([])
 def create_user(request):
     user_serializer = UserSerializer(data=request.data)
     if user_serializer.is_valid():
@@ -42,16 +41,12 @@ def create_user(request):
         user.save()
         user_data = user_serializer.data
         
-        permissions_data = request.data.get('permissions', []) 
-        
-        permissions = Permission.objects.filter(id__in=permissions_data)
-        user.user_permissions.set(permissions)
-        
         return Response({
             "message": "Usuario registrado con éxito",
             "user": user_data,
         }, status=status.HTTP_201_CREATED)
     return Response({"message": "El usuario no se pudo registrar.", "errors": user_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
