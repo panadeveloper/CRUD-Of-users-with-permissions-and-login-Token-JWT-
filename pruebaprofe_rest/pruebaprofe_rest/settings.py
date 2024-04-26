@@ -1,9 +1,6 @@
 from datetime import timedelta
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 SECRET_KEY = "django-insecure-d&3i@-2g@@wt^x)1ukw4ncp-9qg)(51ze0oi@pc)nc)dyh4@dg"
 
 DEBUG = True
